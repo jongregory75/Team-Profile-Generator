@@ -183,3 +183,26 @@ You are required to submit the following for review:
 # Team-Profile-Generator
 # Team-Profile-Generator
 # Team-Profile-Generator
+
+
+
+
+managerName
+managerID
+managerEmail
+managerPhone
+employeeArr[0]
+
+engineerName
+engineerID
+engineerEmail
+engineerGitHub
+employeeArr[0]
+
+internName
+internID
+internEmail
+internSchool
+employeeArr[0]
+
+
