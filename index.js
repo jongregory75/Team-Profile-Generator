@@ -8,6 +8,7 @@ const Employee = require("./lib/Employee");
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
+const path = require("path");
 let htmlObj = [];
 var anotherEmp = "";
 
@@ -104,12 +105,6 @@ const internArr = [
   },
 ];
 
-// function printEmp() {
-//   console.log(
-//     `NAME: ${Employee.empName} ID: ${id} EMAIL: ${email} ROLE: ${role} PHONE/GITHUB/SCHOOL: ${altVar}`
-//   );
-// }
-
 function init() {
   inquireMgr
     .prompt(managerArr)
@@ -123,6 +118,7 @@ function init() {
         "Manager",
         answers.phone
       );
+
       // console.log("Finished manager constructor");
       let anotherEmp = answers.employeeArr;
       console.log(`Manager employeeArr = ${anotherEmp}`);
@@ -155,7 +151,16 @@ function isAnotherEmployee(anotherEmp) {
   } else {
     console.log("Finished Adding Employees");
     anotherEmp = "";
-    renderHtmlObj(htmlObj);
+
+    //const jsonObj = JSON.parse(htmlObj);
+    //var jsonObj = JSON.parse(htmlObj);
+    const OUTPUT_DIR = path.resolve(__dirname, "./");
+    const outputPath = path.join(OUTPUT_DIR, "index.html");
+
+    if (!fs.existsSync(OUTPUT_DIR)) {
+      fs.mkdirSync(OUTPUT_DIR);
+    }
+    fs.writeFileSync(outputPath, renderHtmlObj(htmlObj), "utf-8");
   }
 }
 
@@ -179,6 +184,7 @@ function inquireEngineer() {
       //add engineerAnswers to htmlObj
       console.log("ABOUT TO PUSH ENGINEER ARRAY");
       htmlObj.push(engineer);
+      console.table(htmlObj);
       isAnotherEmployee(anotherEmp);
     })
 
@@ -211,7 +217,7 @@ function inquireIntern() {
       //add internAnswers to htmlObj
       console.log("ABOUT TO PUSH INTERN ARRAY");
       htmlObj.push(intern);
-
+      console.table(htmlObj);
       isAnotherEmployee(anotherEmp);
     })
 
@@ -222,7 +228,7 @@ function inquireIntern() {
         // Something else went wrong
       }
     });
-  return htmlObj;
+  // return htmlObj;
 }
 
 init();

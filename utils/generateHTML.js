@@ -1,8 +1,14 @@
 const fs = require("fs");
 const path = require("path");
+const Employee = require("../lib/Employee");
+const Manager = require("../lib/Manager");
+const Engineer = require("../lib/Engineer");
+const Intern = require("../lib/Intern");
+
 var name;
 var id;
 var dynHtml = "";
+var indexHtml = "";
 
 //function that renders html for the array of objects passed
 function renderHtmlObj(htmlObj) {
@@ -22,30 +28,31 @@ function renderHtmlObj(htmlObj) {
 
   console.log("ABOVE FOR LOOP: ");
   for (var i = 0; i < htmlObj.length; i++) {
-    console.log(htmlObj[i]);
-    console.log(htmlObj[i].empName);
-    console.log(htmlObj[i].id);
-    console.log(htmlObj[i].email);
-    console.log(htmlObj[i].role);
-    if (htmlObj[i].phone) {
-      console.log(htmlObj[i].phone);
-    } else if (htmlObj[i].gitHubName) {
-      console.log(htmlObj[i].gitHubName);
-    } else if (htmlObj[i].schoolName) {
-      console.log(htmlObj[i].schoolName);
+    console.table(htmlObj[i]);
+    console.log("Length " + htmlObj.length);
+
+    console.table(`Employee name: ${htmlObj[i].getName()}`);
+    console.table(`ID: ${htmlObj[i].getID()}`);
+    console.table(`Email: ${htmlObj[i].getEmail()}`);
+    console.table(`Role ${htmlObj[i].getRole()}`);
+
+    if (htmlObj[i].getPhone()) {
+      console.table(`Phone: ${htmlObj[i].getPhone()}`);
+    } else if (htmlObj[i].getGitHubName()) {
+      console.table(`GITHUB: ${htmlObj[i].getGitHubName()}`);
+    } else if (htmlObj[i].getSchoolName()) {
+      console.table(`SCHOOLNAME: ${htmlObj[i].getSchoolName()}`);
     }
     console.log("BUILDING CARD: ");
-    // var cardHtml = `<div class="card" style="width: 200px;">
-    //   <div class="card-body">
-    //     <h2 class="card-title"></h2> ${empName}
-    //     <h3 class="card-text">ID: </h3> ${htmlId}
-    //     <pathh3 class="card-text">ID: </h3> ${htmlEmail}
-    //     <h3 class="card-text">ID: </h3> ${htmlRole}
-    //     <h3 class="card-text">ID: </h3> ${htmlEmail}
-    //     <h3 class="card-text">ID: </h3> ${htmlPhone}
-    //     <a href="#" class="btn btn-primary">Go somewhere</a>
-    //   </div>
-    // </div>`;
+    var cardHtml = `<div class="card" style="width: 200px;">
+      <div class="card-body">
+        <h2 class="card-title"></h2> ${htmlObj[i].getName()}
+        <h3 class="card-text">ID: </h3> ${htmlObj.getID()}
+        <pathh3 class="card-text">ID: </h3> ${htmlObj.getEmail()}
+        // <h3 class="card-text">ID: </h3> ${htmlObj.getRole()}
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>`;
 
     dynHtml = dynHtml + cardHtml;
   }
@@ -58,9 +65,9 @@ function renderHtmlObj(htmlObj) {
   indexHtml = `${startHtmlString} ${dynHtml} ${endHtmlString}`;
   console.log(indexHtml);
 
-  //   fs.writeFile("./index.html", indexHtml, (err) =>
-  //     err ? console.error(err) : console.log("Success!")
-  //   );
+  fs.writeFile("./index.html", indexHtml, (err) =>
+    err ? console.error(err) : console.log("Success!")
+  );
 }
 
 //Function exports
