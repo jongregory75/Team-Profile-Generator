@@ -7,13 +7,11 @@ const Intern = require("../lib/Intern");
 
 var name;
 var id;
-var dynHtml = "";
+//var dynHtml = "";
 var indexHtml = "";
+var cardHtml = "";
 
-//function that renders html for the array of objects passed
-function renderHtmlObj(htmlObj) {
-  console.log("Init Start String");
-  const startHtmlString = `
+const startHtmlString = `
   <!DOCTYPE html>
   <html lang="en">
     <head>
@@ -23,44 +21,56 @@ function renderHtmlObj(htmlObj) {
       <title>Team Members</title>
     </head>
     <body>`;
+const endHtmlString = `</body></html>`;
 
-  const endHtmlString = `</body></html>`;
-
+//function that renders html for the array of objects passed
+function renderHtmlObj(htmlObj) {
   console.log("ABOVE FOR LOOP: ");
-  for (var i = 0; i < htmlObj.length; i++) {
-    console.table(htmlObj[i]);
-    console.log("Length " + htmlObj.length);
+  let dynHTML = "";
 
-    console.table(`Employee name: ${htmlObj[i].getName()}`);
-    console.table(`ID: ${htmlObj[i].getID()}`);
-    console.table(`Email: ${htmlObj[i].getEmail()}`);
-    console.table(`Role ${htmlObj[i].getRole()}`);
-
-    if (htmlObj[i].getPhone()) {
-      console.table(`Phone: ${htmlObj[i].getPhone()}`);
-    } else if (htmlObj[i].getGitHubName()) {
-      console.table(`GITHUB: ${htmlObj[i].getGitHubName()}`);
-    } else if (htmlObj[i].getSchoolName()) {
-      console.table(`SCHOOLNAME: ${htmlObj[i].getSchoolName()}`);
+  htmlObj.forEach((card) => {
+    switch (card.getRole()) {
+      case "Manager":
+        cardHtml = `<div class="card" style="width: 200px;">
+        <div class="card-body">
+          <h2 class="card-title"></h2> ${card.getName()}
+          <h3 class="card-text">ID: </h3> ${card.getID()}
+          <h3 class="card-text">ID: </h3> ${card.getEmail()}
+          <h3 class="card-text">ID: </h3> ${card.getRole()}
+          <h3 class="card-text">ID: </h3> ${card.getPhone()}
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>`;
+        dynHtml = dynHtml + cardHtml;
+        break;
+      case "Engineer":
+        cardHtml = `<div class="card" style="width: 200px;">
+        <div class="card-body">
+        <h2 class="card-title"></h2> ${card.getName()}
+        <h3 class="card-text">ID: </h3> ${card.getID()}
+        <h3 class="card-text">ID: </h3> ${card.getEmail()}
+        <h3 class="card-text">ID: </h3> ${card.getRole()}
+          <h3 class="card-text">ID: </h3> ${card.getGitHubName()}
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>`;
+        dynHtml = dynHtml + cardHtml;
+        break;
+      case "Intern":
+        cardHtml = `<div class="card" style="width: 200px;">
+        <div class="card-body">
+        <h2 class="card-title"></h2> ${card.getName()}
+        <h3 class="card-text">ID: </h3> ${card.getID()}
+        <h3 class="card-text">ID: </h3> ${card.getEmail()}
+        <h3 class="card-text">ID: </h3> ${card.getRole()}
+          <h3 class="card-text">ID: </h3> ${card.getSchoolName()}
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>`;
+        dynHtml = dynHtml + cardHtml;
+        break;
     }
-    console.log("BUILDING CARD: ");
-    var cardHtml = `<div class="card" style="width: 200px;">
-      <div class="card-body">
-        <h2 class="card-title"></h2> ${htmlObj[i].getName()}
-        <h3 class="card-text">ID: </h3> ${htmlObj.getID()}
-        <pathh3 class="card-text">ID: </h3> ${htmlObj.getEmail()}
-        // <h3 class="card-text">ID: </h3> ${htmlObj.getRole()}
-        <a href="#" class="btn btn-primary">Go somewhere</a>
-      </div>
-    </div>`;
-
-    dynHtml = dynHtml + cardHtml;
-  }
-
-  console.log("dynHTML :" + dynHtml);
-
-  console.log("In generateHTML FUNCTION:");
-
+  });
   //writeFile
   indexHtml = `${startHtmlString} ${dynHtml} ${endHtmlString}`;
   console.log(indexHtml);

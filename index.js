@@ -152,8 +152,6 @@ function isAnotherEmployee(anotherEmp) {
     console.log("Finished Adding Employees");
     anotherEmp = "";
 
-    //const jsonObj = JSON.parse(htmlObj);
-    //var jsonObj = JSON.parse(htmlObj);
     const OUTPUT_DIR = path.resolve(__dirname, "./");
     const outputPath = path.join(OUTPUT_DIR, "index.html");
 
@@ -208,7 +206,7 @@ function inquireIntern() {
         answers.id,
         answers.email,
         "Intern",
-        answers.gitHubName
+        answers.schoolName
       );
 
       anotherEmp = answers.employeeArr;
