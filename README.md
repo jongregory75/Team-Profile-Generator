@@ -44,7 +44,7 @@ THEN I exit the application, and the HTML is generated
 
 The following image shows a mock-up of the generated HTML’s appearance:
 
-![Team Generator Showing Output](./Assets/TeamGen.JPG)
+![Team Generator Showing Output](/Assets/TeamGen.JPG)
 
 [video demonstrating usage] https://drive.google.com/file/d/1fbMuGA-8mvuxnYnIXNN5QGDpGNg9IMjQ/view?usp=sharing
 
