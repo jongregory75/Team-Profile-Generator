@@ -47,7 +47,7 @@ describe("Manager", () => {
       expect(cb).toThrowError(err);
     });
 
-    //CASE: Email not a string
+    //CASE: Email not ! empty
     it("should throw an error if 'email' is empty", () => {
       const cb = () => new Manager(empName, id, "", role, phone);
       const err = new Error("Employee email is empty");
@@ -55,7 +55,7 @@ describe("Manager", () => {
       expect(cb).toThrowError(err);
     });
 
-    //CASE: Role is ! Manager
+    //CASE: Role is !Manager
     it("should throw an error if 'role' is empty", () => {
       const cb = () => new Manager(empName, id, email, "", phone);
       const err = new Error("Employee role is empty");
@@ -63,7 +63,7 @@ describe("Manager", () => {
       expect(cb).toThrowError(err);
     });
     //CASE: Phone is !empty
-    it("should throw an error if 'role' is empty", () => {
+    it("should throw an error if 'phone' is empty", () => {
       const cb = () => new Manager(empName, id, email, role, "");
       const err = new Error("Manager phone is empty");
 

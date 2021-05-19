@@ -218,14 +218,7 @@ function isAnotherEmployee(anotherEmp) {
   } else {
     console.log("Finished Adding Employees");
     anotherEmp = "";
-
-    const OUTPUT_DIR = path.resolve(__dirname, "./");
-    const outputPath = path.join(OUTPUT_DIR, "index.html");
-
-    if (!fs.existsSync(OUTPUT_DIR)) {
-      fs.mkdirSync(OUTPUT_DIR);
-    }
-    fs.writeFileSync(outputPath, renderHtmlObj(htmlObj), "utf-8");
+    renderHtmlObj(htmlObj);
   }
 }
 
